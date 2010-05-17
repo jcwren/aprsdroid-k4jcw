@@ -16,7 +16,7 @@ APRSDroid supports:
 
 = What's Missing? =
 
-When a ballon is display on Google Maps, touching the ballon will cause a bubble to pop up with additional information.  At the time I wrote APRSDroid, it appears to have been not possible for a user application to implement this same functionality.  
+When a ballon is displayed on Google Maps, touching the ballon will cause a bubble to pop up with additional information.  At the time I wrote APRSDroid, it appears to have been not possible for a user application to implement this same functionality.  
 
 As it stands, touching an object on the map brings up a new window with information about it.  I'd really prefer that it popped up a bubble with the station details.  This may now be possible in 1.6 or later.
 
