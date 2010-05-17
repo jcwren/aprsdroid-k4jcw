@@ -1,0 +1,8 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical" 
+    android:autoLink="all"
+    android:padding = "5dip"
+    android:text="@string/help_text"
+ />

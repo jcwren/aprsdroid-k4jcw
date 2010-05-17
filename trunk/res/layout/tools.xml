@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0">
+	<TableRow> 
+      <Button 
+        android:id="@+id/toolsReturnToMap" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Return to Map" 
+        android:clickable="true" 
+        android:layout_marginTop="7px">
+      </Button>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/toolsJumpToMyself" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Center &amp; Zoom On Myself" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/toolsFindStation" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Find Station By Callsign" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/toolsSendMessage" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Send Message To Station" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+	<TableRow> 
+      <Button 
+        android:id="@+id/toolsHelp" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Help" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/toolsAbout" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="About" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+  </TableLayout>
+</ScrollView>		

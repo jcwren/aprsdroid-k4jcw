@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">APRSdroid</string>
+  
+  <string name="about_text">Version %s \n\n
+\tAPRS Map Tracker\n\n
+\tSubmit bugs or recommendations to jcwren@jcwren.com
+  </string>
+  
+  <string name="help_text">List of keys:\n\n
+@ - Find &amp; center myself\n
+H - This help list\n
+F - Find station by callsign\n
+M - Send message\n
+Q - Exit APRSdroid\n
+S - Bring up Settings menu\n
+T - Bring up Tools menu\n
+V - Toggle satellite/map view\n
+Z - Bring up zoom control
+  </string>
+  
+  <string name="oaEmail">oaEmail</string>
+  <string name="oaPassword">oaPassword</string>
+  <string name="oaSSID">oaSSID</string>
+  <string name="oaServer">dcc.openaprs.net</string>
+  <string name="oaPort">2620</string>
+  <string name="oaXmitPosition">oaXmitPosition</string>
+  <string name="oaMessaging">oaMessaging</string>
+  <string name="oaCenterOnMyPosition">oaCenterOnMyPosition</string>
+  <string name="oaFilterWxStations">oaFilterWxStations</string>
+  <string name="oaFilterFixedStations">oaFilterFixedStations</string>
+  <string name="oaFilterMobileStations">oaFilterMobileStations</string>
+  <string name="oaUpdateRate">oaUpdateRate</string>
+  <string name="oaObjectRadius">oaObjectRadius</string>
+  <string name="oaMaxObjects">oaMaxObjects</string>
+  <string name="oaObjectAgeLimit">oaObjectAgeLimit</string>
+  <string name="cfgOrientation">cfgOrientation</string>
+  <string name="alertPositionSend">alertPositionSend</string>
+  <string name="alertPositionSendLED">alertPositionSendLED</string>
+  <string name="alertMessageReceived">alertMessageReceived</string>
+  <string name="alertMessageReceivedLED">alertMessageReceivedLED</string>
+  
+  <string name="oaEmailDefault">guest</string>
+  <string name="oaPasswordDefault">guest</string>
+  <string name="oaSSIDDefault">9</string>
+  <string name="oaServerDefault">dcc.openaprs.net</string>
+  <string name="oaPortDefault">2620</string>
+  <string name="oaXmitPositionDefault">true</string>
+  <string name="oaMessagingDefault">true</string>
+  <string name="oaWxStationsOnlyDefault">false</string>
+  <string name="oaCenterOnMyPositionDefault">true</string>
+  <string name="oaFilterWxStationsDefault">false</string>
+  <string name="oaFilterFixedStationsDefault">false</string>
+  <string name="oaFilterMobileStationsDefault">false</string>
+  <string name="oaUpdateRateDefault">60</string>
+  <string name="oaObjectRadiusDefault">25</string>
+  <string name="oaMaxObjectsDefault">100</string>
+  <string name="oaObjectAgeLimitDefault">60</string>
+  <string name="cfgOrientationDefault">false</string>
+  <string name="alertPositionSendDefault">false</string>
+  <string name="alertPositionSendLEDDefault">false</string>
+  <string name="alertMessageReceivedDefault">false</string>
+  <string name="alertMessageReceivedLEDDefault">false</string>
+  
+  <string name="sendMessageCallsignHint">&lt;Callsign&gt;</string>
+  <string name="sendMessageTextHint">&lt;Enter message text&gt;</string>
+  
+  <string name="about_title">About %s</string>
+  <string name="findstation_title">Locate Station On Map</string>
+  <string name="help_title">Help</string>
+  <string name="myself_title">Myself Info</string>
+  <string name="notification_title">Message Notification</string>
+  <string name="object_title">Object Info</string>
+  <string name="sendmessage_title">Send Message To Station</string>
+  <string name="settings_title">Settings</string>
+  <string name="tools_title">Tools Menu</string>
+  
+  <string name="aprsdroidServiceLabel">APRSdroid Service</string>
+  <string name="aprsdroidServiceRunning">Use 'quit' to shutdown completely.</string>
+</resources>

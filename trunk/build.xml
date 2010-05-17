@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<project name="APRS" default="debug">
+		<!-- SDK Locations -->
+		<property name="sdk-folder" value="c:/program files/android-sdk-windows-1.0_r1"></property>
+		<property name="android-tools" value="c:/program files/android-sdk-windows-1.0_r1/tools"></property>
+		
+		<!-- Application Package Name -->
+		<property name="application-package" value="com.tinymicros.aprsdroid"></property>
+
+		<!-- The intermediates directory -->
+		<!-- Eclipse uses "bin" for its own output, so we do the same. -->
+		<property name="outdir" value="bin"></property>
+		
+		<!-- ************************************************************************************* -->
+		<!-- No user servicable parts below. -->
+
+		<property name="android-framework" value="${android-tools}/lib/framework.aidl"></property>
+
+		<!-- Input directories -->
+		<property name="resource-dir" value="res"></property>
+		<property name="asset-dir" value="assets"></property>
+		<property name="srcdir" value="src"></property>
+		<condition property="srcdir-ospath" value="${basedir}\${srcdir}" else="${basedir}/${srcdir}">
+				<os family="windows"></os>
+		</condition>
+
+		<property name="external-libs" value="libs"></property>
+		<condition property="external-libs-ospath" value="${basedir}\${external-libs}" else="${basedir}/${external-libs}">
+				<os family="windows"></os>
+		</condition>
+
+		<!-- Output directories -->
+		<property name="outdir-classes" value="${outdir}/classes"></property>
+		<condition property="outdir-classes-ospath" value="${basedir}\${outdir-classes}" else="${basedir}/${outdir-classes}">
+				<os family="windows"></os>
+		</condition>
+
+		<!-- Create R.java in the source directory -->
+		<property name="outdir-r" value="src"></property>
+
+		<!-- Intermediate files -->
+		<property name="dex-file" value="classes.dex"></property>
+		<property name="intermediate-dex" value="${outdir}/${dex-file}"></property>
+		<condition property="intermediate-dex-ospath" value="${basedir}\${intermediate-dex}" else="${basedir}/${intermediate-dex}">
+				<os family="windows"></os>
+		</condition>
+
+		<!-- The final package file to generate -->
+		<property name="resources-package" value="${outdir}/${ant.project.name}.ap_"></property>
+		<condition property="resources-package-ospath" value="${basedir}\${resources-package}" else="${basedir}/${resources-package}">
+				<os family="windows"></os>
+		</condition>
+
+		<property name="out-debug-package" value="${outdir}/${ant.project.name}-debug.apk"></property>
+		<condition property="out-debug-package-ospath" value="${basedir}\${out-debug-package}" else="${basedir}/${out-debug-package}">
+				<os family="windows"></os>
+		</condition>
+
+		<property name="out-unsigned-package" value="${outdir}/${ant.project.name}-unsigned.apk"></property>
+		<condition property="out-unsigned-package-ospath" value="${basedir}\${out-unsigned-package}" else="${basedir}/${out-unsigned-package}">
+				<os family="windows"></os>
+		</condition>
+
+		<!-- Tools -->
+		<condition property="aapt" value="${android-tools}/aapt.exe" else="${android-tools}/aapt">
+				<os family="windows"></os>
+		</condition>
+		<condition property="aidl" value="${android-tools}/aidl.exe" else="${android-tools}/aidl">
+				<os family="windows"></os>
+		</condition>
+		<condition property="adb" value="${android-tools}/adb.exe" else="${android-tools}/adb">
+				<os family="windows"></os>
+		</condition>
+		<condition property="dx" value="${android-tools}/dx.bat" else="${android-tools}/dx">
+				<os family="windows"></os>
+		</condition>
+		<condition property="apk-builder" value="${android-tools}/apkbuilder.bat" else="${android-tools}/apkbuilder">
+				<os family="windows"></os>
+		</condition>
+
+		<property name="android-jar" value="${sdk-folder}/android.jar"></property>
+
+		<!-- Rules -->
+
+		<!-- Create the output directories if they don't exist yet. -->
+		<target name="dirs">
+				<echo>Creating output directories if needed...</echo>
+				<mkdir dir="${outdir}"></mkdir>
+				<mkdir dir="${outdir-classes}"></mkdir>
+		</target>
+
+		<!-- Generate the R.java file for this project's resources. -->
+		<target depends="dirs" name="resource-src">
+				<echo>Generating R.java / Manifest.java from the resources...</echo>
+				<exec executable="${aapt}" failonerror="true">
+						<arg value="package"></arg>
+						<arg value="-m"></arg>
+						<arg value="-J"></arg>
+						<arg value="${outdir-r}"></arg>
+						<arg value="-M"></arg>
+						<arg value="AndroidManifest.xml"></arg>
+						<arg value="-S"></arg>
+						<arg value="${resource-dir}"></arg>
+						<arg value="-I"></arg>
+						<arg value="${android-jar}"></arg>
+				</exec>
+		</target>
+
+		<!-- Generate java classes from .aidl files. -->
+		<target depends="dirs" name="aidl">
+				<echo>Compiling aidl files into Java classes...</echo>
+				<apply executable="${aidl}" failonerror="true">
+						<arg value="-p${android-framework}"></arg>
+						<arg value="-I${srcdir}"></arg>
+						<fileset dir="${srcdir}">
+								<include name="**/*.aidl"></include>
+						</fileset>
+				</apply>
+		</target>
+
+		<!-- Compile this project's .java files into .class files. -->
+		<target depends="dirs, resource-src, aidl" name="compile">
+				<javac bootclasspath="${android-jar}" destdir="${outdir-classes}" encoding="ascii" extdirs="" debug="true" srcdir="." target="1.5">
+						<classpath>
+								<fileset dir="${external-libs}" includes="*.jar"></fileset>
+						</classpath>
+				 </javac>
+		</target>
+
+		<!-- Convert this project's .class files into .dex files. -->
+		<target depends="compile" name="dex">
+				<echo>Converting compiled files and external libraries into ${outdir}/${dex-file}...</echo>
+				<apply parallel="true" executable="${dx}" failonerror="true">
+						<arg value="--dex"></arg>
+						<arg value="--output=${intermediate-dex-ospath}"></arg>
+						<arg path="${outdir-classes-ospath}"></arg>
+						<fileset dir="${external-libs}" includes="*.jar"></fileset>
+				</apply>
+		</target>
+
+		<!-- Put the project's resources into the output package file. -->
+		<target name="package-res-and-assets">
+				<echo>Packaging resources and assets...</echo>
+				<exec executable="${aapt}" failonerror="true">
+						<arg value="package"></arg>
+						<arg value="-f"></arg>
+						<arg value="-M"></arg>
+						<arg value="AndroidManifest.xml"></arg>
+						<arg value="-S"></arg>
+						<arg value="${resource-dir}"></arg>
+						<arg value="-A"></arg>
+						<arg value="${asset-dir}"></arg>
+						<arg value="-I"></arg>
+						<arg value="${android-jar}"></arg>
+						<arg value="-F"></arg>
+						<arg value="${resources-package}"></arg>
+				</exec>
+		</target>
+
+		<!-- Same as package-res-and-assets, but without "-A ${asset-dir}" -->
+		<target name="package-res-no-assets">
+				<echo>Packaging resources...</echo>
+				<exec executable="${aapt}" failonerror="true">
+						<arg value="package"></arg>
+						<arg value="-f"></arg>
+						<arg value="-M"></arg>
+						<arg value="AndroidManifest.xml"></arg>
+						<arg value="-S"></arg>
+						<arg value="${resource-dir}"></arg>
+						<!-- No assets directory -->
+						<arg value="-I"></arg>
+						<arg value="${android-jar}"></arg>
+						<arg value="-F"></arg>
+						<arg value="${resources-package}"></arg>
+				</exec>
+		</target>
+
+		<!-- Invoke the proper target depending on whether or not
+				 an assets directory is present. -->
+		<!-- TODO: find a nicer way to include the "-A ${asset-dir}" argument
+				 only when the assets dir exists. -->
+		<target name="package-res">
+				<available property="res-target" type="dir" value="and-assets" file="${asset-dir}"></available>
+				<property name="res-target" value="no-assets"></property>
+				<antcall target="package-res-${res-target}"></antcall>
+		</target>
+
+		<!-- Package the application and sign it with a debug key.
+		 This is the default target when building. It is used for debug. -->
+		<target depends="dex, package-res" name="debug">
+				<echo>Packaging ${out-debug-package}, and signing it with a debug key...</echo>
+				<exec executable="${apk-builder}" failonerror="true">
+						<arg value="${out-debug-package-ospath}"></arg>
+						<arg value="-z"></arg>
+						<arg value="${resources-package-ospath}"></arg>
+						<arg value="-f"></arg>
+						<arg value="${intermediate-dex-ospath}"></arg>
+						<arg value="-rf"></arg>
+						<arg value="${srcdir-ospath}"></arg>
+						<arg value="-rj"></arg>
+						<arg value="${external-libs-ospath}"></arg>
+				</exec>
+		</target>
+
+		<!-- Package the application without signing it.
+			 This allows for the application to be signed later with an official publishing key. -->
+		<target depends="dex, package-res" name="release">
+				<echo>Packaging ${out-unsigned-package} for release...</echo>
+				<exec executable="${apk-builder}" failonerror="true">
+						<arg value="${out-unsigned-package-ospath}"></arg>
+						<arg value="-u"></arg>
+						<arg value="-z"></arg>
+						<arg value="${resources-package-ospath}"></arg>
+						<arg value="-f"></arg>
+						<arg value="${intermediate-dex-ospath}"></arg>
+						<arg value="-rf"></arg>
+						<arg value="${srcdir-ospath}"></arg>
+						<arg value="-rj"></arg>
+						<arg value="${external-libs-ospath}"></arg>
+				</exec>
+				<echo>It will need to be signed with jarsigner before being published.</echo>
+		</target>
+
+		<!-- Install the package on the default emulator -->
+		<target depends="debug" name="install">
+				<echo>Installing ${out-debug-package} onto default emulator...</echo>
+				<exec executable="${adb}" failonerror="true">
+						<arg value="install"></arg>
+						<arg value="${out-debug-package}"></arg>
+				</exec>
+		</target>
+
+		<target depends="debug" name="reinstall">
+				<echo>Installing ${out-debug-package} onto default emulator...</echo>
+				<exec executable="${adb}" failonerror="true">
+						<arg value="install"></arg>
+						<arg value="-r"></arg>
+						<arg value="${out-debug-package}"></arg>
+				</exec>
+		</target>
+
+		<!-- Uinstall the package from the default emulator -->
+		<target name="uninstall">
+				<echo>Uninstalling ${application-package} from the default emulator...</echo>
+				<exec executable="${adb}" failonerror="true">
+						<arg value="uninstall"></arg>
+						<arg value="${application-package}"></arg>
+				</exec>
+		</target>
+
+</project>

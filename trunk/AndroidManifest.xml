@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.tinymicros.aprsdroid"
+	android:versionCode="1"
+    android:versionName="0.0.1">
+    
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.SET_ORIENTATION" />
+	
+	<application 
+	    android:label="@string/app_name" 
+	    android:debuggable="true">
+		<uses-library android:name="com.google.android.maps" />
+		
+		<activity 
+		    android:name=".APRS" 
+			android:label="@string/app_name">
+		   	<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity 
+		  	android:name=".ActivityTools" 
+		  	android:label="@string/tools_title">
+		</activity>
+		
+		<activity 
+		  	android:name=".ActivityAbout" 
+		  	android:label="@string/about_title">
+		</activity>
+		
+        <activity  
+          	android:name=".ActivitySettings"  
+          	android:label="@string/settings_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivityObject"
+          	android:label="@string/object_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivityMyself"
+          	android:label="@string/myself_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivityNotification"
+          	android:label="@string/notification_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivityFindStation"
+          	android:label="@string/findstation_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivitySendMessage"
+          	android:label="@string/sendmessage_title">  
+        </activity>  
+        
+        <activity  
+          	android:name=".ActivityHelp"
+          	android:label="@string/help_title">  
+        </activity>  
+                
+        <provider 
+        	android:name="ProviderUserInfo" 
+        	android:authorities="com.tinymicros.aprsdroid">
+        </provider>
+        
+		<service 
+		  	android:name=".APRSService">
+		</service>
+        
+	</application>
+</manifest>

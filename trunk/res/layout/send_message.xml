@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0">
+	<TableRow>
+	  <TextView 
+		android:id="@+id/sendMessageInfo" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+		android:text="Message text (67 chars)" 
+		android:layout_span="2"
+		android:clickable="false"/>
+	</TableRow>
+	<TableRow> 
+	  <TextView 
+	    android:id="@+id/TextView01" 
+	    android:text="To:" android:gravity="right"/>
+	  <EditText 
+	    android:id="@+id/sendMessageCallsign" 
+	    android:capitalize="characters" 
+	    android:maxLength="9" 
+	    android:maxLines="2" 
+	    android:hint="@string/sendMessageCallsignHint"/>
+	</TableRow>
+	<TableRow>
+	  <EditText
+		android:id="@+id/sendMessageText" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+		android:cursorVisible="true" 
+		android:editable="true" 
+		android:gravity="top|left" 
+		android:layout_span="2"
+		android:maxLength="67" 
+		android:hint="@string/sendMessageTextHint" 
+		android:minLines="2" 
+		android:maxLines="3"/>
+	</TableRow>
+	<TableRow>
+	  <CheckBox 
+	    android:id="@+id/sendMessageAcknowledge" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="Require Acknowledgment" 
+		android:layout_span="2"
+	    android:layout_gravity="center_horizontal"/>
+	</TableRow>
+	<TableRow> 
+      <Button 
+        android:id="@+id/sendMessageSend" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:text="Send" 
+		android:layout_span="2"
+        android:clickable="true"/>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/sendMessageCancel" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:text="Cancel &amp; Return To Map" 
+		android:layout_span="2"
+        android:clickable="true"/>
+    </TableRow>
+  </TableLayout>
+
+</ScrollView>		

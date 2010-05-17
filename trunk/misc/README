@@ -1,0 +1,31 @@
+Command used to generate signing key:
+  keytool.exe -genkey -v -keystore my-release-key.keystore -alias APRSdroid_Release -keyalg RSA -validity 10000
+  
+Keystore password:
+  AnvilSunshineMoonMakeetaSherman
+  
+Data used in release signing key:
+  CN=J.C. Wren, OU=Unknown, O=Unknown, L=Flowery Branch, ST=GA, C=US
+
+To sign release package
+  jarsigner.exe -verbose -keystore APRSdroid_Release.keystore APRS.apk APRSdroid_Release 
+
+Android Maps API keys:
+  Release key:      0ldVxaFsMWoMKojfqe664rrXOiSpw7VwKUZ9pzg / A5:16:0A:44:E0:6B:19:66:21:EB:06:60:76:CE:00:CF
+  Debug (home) key: 0ldVxaFsMWoOrjufkD1FwIUmtaPaQoFcybNif7Q / ?
+  Debug (work) key: 0ldVxaFsMWoMrb1T2jtcBwWDzJTiZDQDzEfMcyQ / ?
+
+Release process:
+  Make sure res->layout->main.xml maps API key set to release key
+  Make sure versionCode and versionName bumped in AndroidManifest.xml file
+  Make sure DATABASE_VERSION in APRSDatabase.java doesn't need to be bumped
+  Make sure current sources checked into subversion
+  Make sure all options set to false in APRSDebug
+  Make sure 'android:debuggable="true"' changed to false in AndroidManifest.xml
+  In package explorer, right-click APRS, select Android Tools->Export Unsigned Application Package
+    (save into directory above APRS)
+  Open DOS/Cygwin window, change to directory where APRS.apk was saved
+  Sign release package using jarsigner (see above for command line)
+  Upload to tinymicros.com/g1
+  
+  
