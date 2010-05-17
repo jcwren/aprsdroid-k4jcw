@@ -1,0 +1,162 @@
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="Preferences">
+    <CheckBoxPreference
+      android:key="@string/oaXmitPosition"
+      android:title="Transmit Position"
+      android:summary="Enable/disable position reporting through OpenAPRS.net"
+      android:defaultValue="@string/oaXmitPositionDefault"
+    />
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="Configuration Options">
+    <PreferenceScreen
+      android:key="detail"
+      android:title="Configuration Options"
+      android:summary="Miscellaneous Options">
+      <CheckBoxPreference
+        android:key="@string/cfgOrientation"
+        android:title="Screen Orientation"
+        android:summary="Enable/disable forcing screen to landscape orientation"
+        android:defaultValue="@string/cfgOrientationDefault"
+      />
+      <CheckBoxPreference
+        android:key="@string/oaMessaging"
+        android:title="APRS Messaging"
+        android:summary="Enable/disable receiving APRS messages"
+        android:defaultValue="@string/oaMessagingDefault"
+      />
+      <CheckBoxPreference
+        android:key="@string/oaCenterOnMyPosition"
+        android:title="Center Map On My Position"
+        android:summary="Enable/disable keeping map centered on my position"
+        android:defaultValue="@string/oaCenterOnMyPositionDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaUpdateRate"
+        android:title="Update rate (in seconds)"
+        android:summary="Frequency of position reporting"
+        android:numeric="integer"
+        android:defaultValue="@string/oaUpdateRateDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaObjectRadius"
+        android:title="Object Radius (in miles)"
+        android:summary="Report only objects within this distance from me"
+        android:numeric="integer"
+        android:defaultValue="@string/oaObjectRadiusDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaMaxObjects"
+        android:title="Maximum Objects"
+        android:summary="Maximum number of objects tracked"
+        android:numeric="integer"
+        android:defaultValue="@string/oaMaxObjectsDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaObjectAgeLimit"
+        android:title="Object Age Limit"
+        android:summary="Discard objects older than X minutes"
+        android:numeric="integer"
+        android:defaultValue="@string/oaObjectAgeLimitDefault"
+      />
+      <PreferenceScreen
+        android:key="detail"
+        android:title="Filters"
+        android:summary="Filter position reports">
+        <CheckBoxPreference
+          android:key="@string/oaFilterWxStations"
+          android:title="Ignore Weather Stations"
+          android:summary="Enable/disable displaying stations reporting weather on map"
+          android:defaultValue="@string/oaFilterWxStationsDefault"
+        />
+        <CheckBoxPreference
+          android:key="@string/oaFilterFixedStations"
+          android:title="Ignore Fixed Stations"
+          android:summary="Enable/disable displaying fixed stations on map"
+          android:defaultValue="@string/oaFilterFixedStationsDefault"
+        />
+        <CheckBoxPreference
+          android:key="@string/oaFilterMobileStations"
+          android:title="Ignore Mobile Stations"
+          android:summary="Enable/disable displaying mobile stations on map"
+          android:defaultValue="@string/oaFilterMobileStationsDefault"
+        />
+      </PreferenceScreen>
+    </PreferenceScreen>
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="Alertifications">
+      <PreferenceScreen
+      android:key="detail"
+      android:title="Alerts &amp; Noises"
+      android:summary="Audio &amp; visual alerts for various events">
+      <CheckBoxPreference
+        android:key="@string/alertPositionSend"
+        android:title="Alert On Position Send"
+        android:summary="Enable/disable playing Morse 'P' when position sent"
+        android:defaultValue="@string/alertPositionSendDefault"
+      />
+      <CheckBoxPreference
+        android:key="@string/alertPositionSendLED"
+        android:title="LED Flash On Position Send"
+        android:summary="Enable/disable flashing LED when position sent"
+        android:defaultValue="@string/alertPositionSendLEDDefault"
+      />
+      <CheckBoxPreference
+        android:key="@string/alertMessageReceived"
+        android:title="Alert On Message Received"
+        android:summary="Enable/disable playing Morse 'SMS' when message received"
+        android:defaultValue="@string/alertMessageReceivedDefault"
+      />
+      <CheckBoxPreference
+        android:key="@string/alertMessageReceivedLED"
+        android:title="LED Flash On Message Received"
+        android:summary="Enable/disable flashing LED when message received"
+        android:defaultValue="@string/alertMessageReceivedLEDDefault"
+      />
+    </PreferenceScreen>
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="OpenAPRS Login Information">
+    <PreferenceScreen
+      android:key="detail"
+      android:title="OpenAPRS.net Login"
+      android:summary="OpenAPRS.net username &amp; password">
+      <EditTextPreference
+        android:key="@string/oaEmail"
+        android:title="Email"
+        android:summary="OpenAPRS.net Email"
+        android:defaultValue="@string/oaEmailDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaPassword"
+        android:title="Password"
+        android:summary="OpenAPRS.net Password"
+        android:password="true"
+        android:defaultValue="@string/oaPasswordDefault"
+      />
+    </PreferenceScreen>
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="OpenAPRS.net Server Information">
+    <PreferenceScreen
+      android:key="detail"
+      android:title="OpenAPRS.net Server"
+      android:summary="OpenAPRS.net server &amp; port address">
+      <EditTextPreference
+        android:key="@string/oaServer"
+        android:title="Server"
+        android:summary="OpenAPRS.net Server Name"
+        android:defaultValue="@string/oaServerDefault"
+      />
+      <EditTextPreference
+        android:key="@string/oaPort"
+        android:title="Port"
+        android:summary="OpenAPRS.net Port"
+        android:defaultValue="@string/oaPortDefault"
+      />
+    </PreferenceScreen>
+  </PreferenceCategory>
+  
+</PreferenceScreen>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0">
+	<TableRow>
+	  <TextView 
+		android:id="@+id/notificationText" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+		android:text="Dummy Msg"/>
+	</TableRow>
+	<TableRow> 
+      <Button 
+        android:id="@+id/notificationReturnToMap" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Return To Map" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+	<TableRow> 
+      <Button 
+        android:id="@+id/notificationReply" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Send Reply" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+    <TableRow> 
+      <Button 
+        android:id="@+id/notificationJumpToOnMap" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Jump To On Map" 
+        android:clickable="true">
+      </Button>
+    </TableRow>
+  </TableLayout>
+</ScrollView>		

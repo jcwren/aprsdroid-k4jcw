@@ -1,0 +1,83 @@
+Current state at this checkin:
+  Tracks & ages objects (fixed time, fixed number)
+  Messaging works
+  Preference system works
+  Generally works, needs features, cleanup
+  Filters work (although in-motion needs some tuning)
+  Keyboard short-cuts work
+  Help (somewhat limited)
+  Icon caching implemented
+    
+Things to do:
+  If bad password response seen, disable sending fix, considering is logged in, throw message
+  Start from position/start from home
+  Lock position
+  Position bookmarks
+  Press and hold on object brings up track, status, re-center map, etc menu
+  Audio alarm and/or alert on station movement or severe weather
+  Needs variation in lat/long to be considered in motion
+  Lots of exceptions need to be more specifically handled
+  Need to handle network CONNECT message (or do we?)
+  Variable reporting rate depending on speed?
+  Add splash screen
+  Flesh out About page
+  Need application icon
+  How to add text description that shows up in Settings->Applications list
+  Add OpenIntents.org versioning
+  Support hiding object?
+  Distance needs to be added to object aging algorithm
+  Some way to handle stacked icons
+  Tabbed view to show stations by age, distance from me, etc
+  Use trackball to mouse-over on-screen icons
+  Still some problem with initial position if no GPS (not using network, like MapActivity seems to be)
+  
+Done:
+  Allow filtering out fixed, mobile, and/or weather stations
+  Allow user to force orientation without opening keyboard
+  Handle messages received and permit sending
+  Coarse fix OK for .LV, must have GPS for .CP
+  Clicking blue dot should show APRS data
+  Show service status icon at top
+  Hitting home from another activity screen leaves APRSService running in non-service mode
+  Spinner list to jump to a callsign position
+  Include program name and version in login
+  Add keyboard shortcuts
+  Center & Zoom should do updateMap() first
+  Need better object icons
+  Certain overlayed icons should be pre-generated for speed
+  Cache any internally generated overlays
+  
+Considerations:
+  How to handle received positions
+  What to do if can't connect to server or gets disconnected
+  What to do if service crashes
+  
+Known issues:
+  Opening keyboard will disconnect/reconnect to server if not background mode
+  Map redrawn every 10 seconds to update onTap messages (don't like this)
+  
+Design
+  Server hands a list of APRSObjects to the UI thread. The list has no 
+  duplicate callsigns, is limited to oaMaxObjects, and has no objects 
+  older than oaObjectAgeLimit.  If oaWxStationsOnly is true, the list 
+  will contain only weather stations.
+  
+Notes
+  Database is scrubbed every 60 seconds
+  Distance/heading from me is updated every 10 seconds
+  
+Links
+  URI from resource: http://markmail.org/message/wmc5bjfrhn42vl64
+  Problems with it: http://groups.google.com/group/android-developers/browse_thread/thread/6c0bf51c5b15ebd0?pli=1
+
+Debugging 
+  mNotification.sound = Uri.parse (getResources ().getResourceName (R.raw.morse_sms));
+	12-12 13:51:39.606: WARN/NotificationService(51): error loading sound for com.tinymicros.aprsdroid:raw/morse_sms
+	12-12 13:51:39.606: WARN/NotificationService(51): java.io.IOException: Prepare failed.: status=0xFFFFFFFC
+	12-12 13:51:39.606: WARN/NotificationService(51):     at android.media.MediaPlayer.prepare(Native Method)
+	12-12 13:51:39.606: WARN/NotificationService(51):     at android.media.AsyncPlayer$Thread.run(AsyncPlayer.java:77)
+  mNotification.sound = Uri.parse ("android.resource://" + packageName + "/" + R.raw.morse_sms);
+    12-12 13:59:15.586: WARN/NotificationService(51): error loading sound for android.resource://com.tinymicros.aprsdroid/2131034113
+    12-12 13:59:15.586: WARN/NotificationService(51): java.io.IOException: Prepare failed.: status=0xFFFFFFFC
+    12-12 13:59:15.586: WARN/NotificationService(51):     at android.media.MediaPlayer.prepare(Native Method)
+    12-12 13:59:15.586: WARN/NotificationService(51):     at android.media.AsyncPlayer$Thread.run(AsyncPlayer.java:77)
